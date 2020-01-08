@@ -1,0 +1,39 @@
+{% extends 'h_utama.html' %}
+
+
+{% block body %}
+	<div class="container col-lg-6">
+		<table class="table table-bordered tabel-hover">
+			{% for row in hasil %}
+			<tr><h2>Nota</h2></tr>
+			<tr>
+				<th>ID</th>
+				<td>{{ row.0 }}</td>
+			</tr>
+			<tr>
+				<th>Nama</th>
+				<td>{{ row.1 }}</td>
+			</tr>
+			<tr>
+				<th>Card</th>
+				<td>{{ row.2 }}</td>
+			</tr>
+			<tr>
+				<th>Kamera</th>
+				<td>{{ row.3 }}</td>
+			</tr>
+			<tr>
+				<th>Hari</th>
+				<td>{{ row.4 }}</td>
+			</tr>
+			<tr>
+				<th>Total</th>
+				<td>{{ row.5 }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<a href="{{ url_for('halaman_utama')}}" class="btn btn-primary">OK</a>
+	</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
