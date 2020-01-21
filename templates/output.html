@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<br><br><br>
+	<div class="container col-lg-6">
+		{% for row in hasil %}
+		<table class="table table-striped border">
+			<tr>
+				<th>ID</td>
+				<td>{{ row.0 }}</td>
+			</tr>
+			<tr>
+				<th>Nama</th>
+				<td>{{ row.1 }}</td>
+			</tr>
+			<tr>
+				<th>Card</th>
+				<td>{{ row.2 }}</td>
+			</tr>
+			<tr>
+				<th>Kamera</th>
+				<td>{{ row.3 }}</td>
+			</tr>
+			<tr>
+				<th>Hari</th>
+				<td>{{ row.4 }}</td>
+			</tr>
+			<tr>
+				<th>Total</th>
+				<td>{{ row.5 }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<a href="{{ url_for('halaman_utama')}}" class="btn btn-primary">OK</a>
+	</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from mysql import connector
+
 app = Flask(__name__)
 
 db = connector.connect(
@@ -11,15 +12,15 @@ db = connector.connect(
 
 @app.route('/')
 def halaman_utama():
-	return render_template('h_utama.html')
+	return render_template('index.html')
 
 @app.route('/sewa')
 def sewa():
-	return render_template('h_sewa.html')
+	return render_template('main.html')
 
 @app.route('/sewa',methods=['GET','POST'])
 def proses_sewa():
-	global total, kamera, idpenyewa, test1, kamera1
+	global total, kamera, idpenyewa
 	nama = request.form['nama']
 	no_tlp = request.form['nomer']
 	id_card = request.form['card']
@@ -51,9 +52,8 @@ def proses_sewa():
 	for row in cur2:
 		idpenyewa = (max(row))
 
-
-	cur4 = db.cursor()
-	cur4.execute('INSERT INTO sewa(id_penyewa, id_kamera, durasi, total) VALUES (%s, %s, %s, %s)',
+	cur3 = db.cursor()
+	cur3.execute('INSERT INTO sewa(id_penyewa, id_kamera, durasi, total) VALUES (%s, %s, %s, %s)',
 				 (idpenyewa, proses_sewa.kamera, durasi, total))
 	db.commit()
 	return redirect(url_for('hasil_sewa'))
@@ -65,7 +65,7 @@ def hasil_sewa():
 	cur.execute("select sewa.id_sewa, penyewa.nama, card.keterangan, kamera.merek, sewa.durasi, sewa.total FROM sewa, penyewa, card, kamera WHERE sewa.id_penyewa= penyewa.id_penyewa AND sewa.id_kamera = kamera.id_kamera AND card.id_card=penyewa.id_card order by sewa.id_sewa desc limit 1 ")
 	res = cur.fetchall()
 
-	return render_template('h_hasil.html', hasil=res)
+	return render_template('output.html', hasil=res)
 
 
 if db.is_connected():
