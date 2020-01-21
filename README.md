@@ -11,4 +11,4 @@ Kelompok 9
   - Bertha
   - Fikri
   
-Progress : 93%
+Progress : 100%
